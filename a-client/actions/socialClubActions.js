@@ -5,7 +5,6 @@ export function getClub(club_id) {
   return (dispatch) => {
     return axios.get(`/api/v1/category/${club_id}/events/`)
       .then((res) => {
-        
         dispatch({
           type: constants.GET_CLUB,
           club: res.data
@@ -39,10 +38,11 @@ export function getClubs(socialClubs) {
 
 export function getAllClubs() {
   return (dispatch) => {
-    return axios.get('/api/v1/categories/').then(socialClubs => {
-      console.log(socialClubs);
+    return axios.get('/api/v1/categories/')
+    .then(socialClubs => {
       dispatch(getClubs(socialClubs.data.results));
-    }).catch(error => {
+    })
+    .catch(error => {
       throw error;
     });
   };
