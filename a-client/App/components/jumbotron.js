@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Footer from './../common/Footer';
@@ -11,6 +12,7 @@ class Jumbotron extends Component {
   }
   render() {
     const defaultImageUrl = 'https://www.omnihotels.com/-/media/images/hotels/pueave/hotel/pueave-omni-puerto-aventuras-beach-resort.jpg?h=660&la=en&w=1170';
+    
     return (
       <div className="jumbotron">
         <div className="container">
@@ -29,10 +31,10 @@ class Jumbotron extends Component {
                         <div className="club hvr-glow"
                               style={{
                                 backgroundImage: `url(${club.featured_image || defaultImageUrl})`
-                              }}>
+                              }}> {club.name}
                         </div>
                         <section className='button-group hvr-glow'>
-                          <button><span className="glyphicon glyphicon-eye-open"></span><span>preview</span></button>
+                          <button><Link to={`/home/clubs/${club.id}`}><span className="glyphicon glyphicon-eye-open"></span><span>preview</span></Link></button>
                           <button><span className="glyphicon glyphicon-plus"></span><span>join</span></button>
                         </section>
                       </div>

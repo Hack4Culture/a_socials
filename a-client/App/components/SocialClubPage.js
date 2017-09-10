@@ -27,7 +27,8 @@ class SocialClubPage extends Component {
 
   
   componentDidMount() {
-    this.props.getClub(3);
+    console.log('Props params', this.props.params)
+    this.props.getClub(this.props.params.club_id);
     toastr.success('Clubs loaded Successfully');
   }
 
@@ -46,8 +47,14 @@ class SocialClubPage extends Component {
     });
   }
 
-  join(details={'club_id': 3, 'email': 'ig@uk.com'}){
-    this.props.joinClub(details)
+  clubDetails(){
+    return {
+      'club_id': this.props.club.id, 'email': 'ig@uk.com'
+    };
+  }
+
+  join(details){
+    this.props.joinClub(clubDetails())
     .then(() => {
       toastr.success('You have successfully joined this Club. You will be notified of new events');
     })
@@ -128,6 +135,7 @@ class SocialClubPage extends Component {
           { events &&
             events.map(event =>
             <EventList
+              club_id={id}
               key={event.id}
               event={event} 
             />
@@ -139,7 +147,6 @@ class SocialClubPage extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log('State', state)
   return {
     club: state.socialClub
   };
